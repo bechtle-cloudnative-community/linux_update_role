@@ -16,6 +16,6 @@
         upgrade: "{{ apt.dist_upgrade_type }}"
 
     - name: Apt autoremove (apt)
-      when: update_autoremove
+      when: apt.update_autoremove
       ansible.builtin.apt:
         autoremove: "{{ apt.update_autoremove }}"
