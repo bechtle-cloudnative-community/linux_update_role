@@ -15,7 +15,7 @@ apt:
 # define values for dnf  
 dnf:
   only_bugfix: false
-  dnf.only_security: false
+  only_security: false
 
 # When updating systems, a reboot may be required. Here you can select to:
 # "yes": Always reboot when packages have changed.
