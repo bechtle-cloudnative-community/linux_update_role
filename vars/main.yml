@@ -2,3 +2,4 @@
 # vars file for linux_update_role
 supported_pkg_mgr:
   - apt
+  - dnf
