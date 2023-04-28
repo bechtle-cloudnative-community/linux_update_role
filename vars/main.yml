@@ -3,3 +3,4 @@
 supported_pkg_mgr:
   - apt
   - dnf
+  - zypper
