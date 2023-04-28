@@ -1,21 +1,19 @@
 # Debian like System update Plan
-- name: Start Block for apt update 
-  block:
+- name: Update to the latest Version (Bug & Security fixes)
+  ansible.builtin.apt:
+    name: "*"
+    update_cache: true
+    cache_valid_time: "{{ apt.update_cache_valid_time }}"
+    only_upgrade: true
+    state: latest # noqa package-latest This role is to update packages.
+# Debian Dist Upgrade
+- name: Upgrade OS and 
+  when: apt.dist_upgrade
+  ansible.builtin.apt:
+    upgrade: "{{ apt.dist_upgrade_type }}"
 
-    - name: Update to the latest Version (Bug & Security fixes)
-      ansible.builtin.apt:
-        name: "*"
-        update_cache: true
-        cache_valid_time: "{{ apt.update_cache_valid_time }}"
-        only_upgrade: true
-        state: present
-
-    - name: Upgrade OS and 
-      when: apt.dist_upgrade
-      ansible.builtin.apt:
-        upgrade: "{{ apt.dist_upgrade_type }}"
-
-    - name: Apt autoremove (apt)
-      when: apt.update_autoremove
-      ansible.builtin.apt:
-        autoremove: "{{ apt.update_autoremove }}"
+# Autoremove package when requested
+- name: Apt autoremove (apt)
+  when: update_autoremove
+  ansible.builtin.apt:
+    autoremove: "{{ update_autoremove }}"

@@ -1,0 +1,34 @@
+---
+# DNF Upgrade task
+- name: Update all software (dnf)
+  when: not dnf.only_bugfix and not dnf.only_security
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest  # noqa package-latest This role is to update packages.
+    update_cache: true
+    update_only: true
+
+- name: Update all software (dnf)
+  when: dnf.only_bugfix and not dnf.only_security
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest  # noqa package-latest This role is to update packages.
+    bugfix: "{{ dnf.only_bugfix }}"
+    update_cache: true
+    update_only: true
+
+- name: Update all software (dnf)
+  when: not dnf.only_bugfix and dnf.only_security
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest  # noqa package-latest This role is to update packages.
+    bugfix: "{{ dnf.only_security }}"
+    update_cache: true
+    update_only: true
+
+
+- name: Remove packates not needed anymore
+  ansible.builtin.dnf:
+    autoremove: true
+
+    

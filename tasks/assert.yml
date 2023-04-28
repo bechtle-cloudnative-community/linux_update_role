@@ -3,8 +3,8 @@
 - name: Test if update_autoremove is set correctly
   ansible.builtin.assert:
     that:
-      - apt.update_autoremove is defined
-      - apt.update_autoremove is boolean
+      - update_autoremove is defined
+      - update_autoremove is boolean
     quiet: yes
 
 - name: Test if update_autoremove is set correctly
