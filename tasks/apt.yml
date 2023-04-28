@@ -13,7 +13,7 @@
     - name: Upgrade OS and 
       when: apt.dist_upgrade
       ansible.builtin.apt:
-        upgrade: "{{ apt.upgrade_type }}"
+        upgrade: "{{ apt.dist_upgrade_type }}"
 
     - name: Apt autoremove (apt)
       when: update_autoremove
