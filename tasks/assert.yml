@@ -44,6 +44,20 @@
       - dnf.only_security is boolean
     quiet: yes
 
+- name: Test if zyperre.update_type is set correctly
+  ansible.builtin.assert:
+    that:
+      - zypper.patch is defined
+      - zypper.patch is boolean    
+    quiet: yes
+
+- name: Test if zyperre.dist_upgrade is set correctly
+  ansible.builtin.assert:
+    that:
+      - zypper.dist_upgrade is defined
+      - zypper.dist_upgrade is boolean    
+    quiet: yes
+
 - name: Test if update_reboot is set correctly
   ansible.builtin.assert:
     that:

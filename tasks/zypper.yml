@@ -1,0 +1,23 @@
+---
+# SUSE Zypper update all packages
+- name: Update all packages
+  when: not zypper.patch
+  community.general.zypper:
+    name: '*'
+    state: latest
+
+# SUSE Zyper patch only bugfixes & security
+- name: Apply only bugfixes & security
+  when: zypper.patch
+  community.general.zypper:
+    name: '*'
+    state: latest
+    type: patch
+
+# SUSE Zyper patch only bugfixes & security
+- name: Apply only bugfixes & security
+  when: zypper.dist_upgrade
+  community.general.zypper:
+    name: '*'
+    state: dist-upgrade
+    allow_vendor_change: true
