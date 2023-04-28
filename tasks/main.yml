@@ -15,9 +15,9 @@
 
 # Test if ansible_pkg_mgr is supported by role
 - name: Stop running if no Supported package manger is available
-  when: ansiblle_pkg_mgr not in supported_pkg_mgr
+  when: ansible_pkg_mgr not in supported_pkg_mgr
   ansible.builtin.fail:
-    msg: "{{ ansiblle_pkg_mgr }} not supported in this role"
+    msg: "{{ ansible_pkg_mgr }} not supported in this role"
     
 # tasks file for linux_update_role
 - name: Import assert.yml
