@@ -14,12 +14,12 @@
       - apt.dist_upgrade is boolean
     quiet: yes
 
-- name: Test if update_upgrade_command is set correctly
+- name: Test if dist_upgrade_type is set correctly
   ansible.builtin.assert:
     that:
-      - apt.update_upgrade_command is defined
-      - apt.update_upgrade_command is string
-      - apt.update_upgrade_command in [ "dist", "full", "yes", "safe" ]
+      - apt.dist_upgrade_type is defined
+      - apt.dist_upgrade_type is string
+      - apt.dist_upgrade_type in [ "dist", "full", "yes", "safe" ]
     quiet: yes
 
 - name: Test if update_cache_valid_time is set correctly

@@ -6,16 +6,16 @@
       ansible.builtin.apt:
         name: "*"
         update_cache: true
-        cache_valid_time: "{{ update_cache_valid_time }}"
+        cache_valid_time: "{{ apt.update_cache_valid_time }}"
         only_upgrade: true
         state: present
 
     - name: Upgrade OS and 
-      when: apt_dist_upgrade
+      when: apt.dist_upgrade
       ansible.builtin.apt:
-        upgrade: "{{ update_upgrade_command }}"
+        upgrade: "{{ apt.upgrade_type }}"
 
     - name: Apt autoremove (apt)
       when: update_autoremove
       ansible.builtin.apt:
-        autoremove: "{{ update_autoremove }}"
+        autoremove: "{{ apt.update_autoremove }}"
