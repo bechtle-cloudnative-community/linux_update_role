@@ -1,0 +1,21 @@
+# Debian like System update Plan
+- name: Start Block for apt update 
+  block:
+
+    - name: Update to the latest Version (Bug & Security fixes)
+      ansible.builtin.apt:
+        name: "*"
+        update_cache: true
+        cache_valid_time: "{{ update_cache_valid_time }}"
+        only_upgrade: true
+        state: present
+
+    - name: Upgrade OS and 
+      when: apt_dist_upgrade
+      ansible.builtin.apt:
+        upgrade: "{{ update_upgrade_command }}"
+
+    - name: Apt autoremove (apt)
+      when: update_autoremove
+      ansible.builtin.apt:
+        autoremove: "{{ update_autoremove }}"

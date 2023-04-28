@@ -1,0 +1,38 @@
+---
+
+- name: Test if update_autoremove is set correctly
+  ansible.builtin.assert:
+    that:
+      - apt.update_autoremove is defined
+      - apt.update_autoremove is boolean
+    quiet: yes
+
+- name: Test if update_autoremove is set correctly
+  ansible.builtin.assert:
+    that:
+      - apt.dist_upgrade is defined
+      - apt.dist_upgrade is boolean
+    quiet: yes
+
+- name: Test if update_upgrade_command is set correctly
+  ansible.builtin.assert:
+    that:
+      - apt.update_upgrade_command is defined
+      - apt.update_upgrade_command is string
+      - apt.update_upgrade_command in [ "dist", "full", "yes", "safe" ]
+    quiet: yes
+
+- name: Test if update_cache_valid_time is set correctly
+  ansible.builtin.assert:
+    that:
+      - apt.update_cache_valid_time is defined
+      - apt.update_cache_valid_time is number
+      - apt.update_cache_valid_time >= 0
+    quiet: yes
+
+- name: Test if update_reboot is set correctly
+  ansible.builtin.assert:
+    that:
+      - update_reboot is defined
+      - update_reboot is boolean
+    quiet: yes
