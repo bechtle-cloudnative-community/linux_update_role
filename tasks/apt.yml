@@ -6,7 +6,7 @@
     cache_valid_time: "{{ apt.update_cache_valid_time }}"
     only_upgrade: true
     state: latest # noqa package-latest This role is to update packages.
-    
+
 # Debian Dist Upgrade
 - name: Upgrade OS and 
   when: apt.dist_upgrade
@@ -18,3 +18,18 @@
   when: update_autoremove
   ansible.builtin.apt:
     autoremove: "{{ update_autoremove }}"
+
+# Check for reboot
+- name: Check Reboot File exists
+  register: reboot_required
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+
+# Check if file exist
+- name: Check if reboot is required
+  when: reboot_required.exists
+  ansible.builtin.debug:
+    msg: "Reboot is necessary"
+  notify:
+    - Reboot
+  
