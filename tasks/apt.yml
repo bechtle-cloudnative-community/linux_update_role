@@ -6,6 +6,7 @@
     cache_valid_time: "{{ apt.update_cache_valid_time }}"
     only_upgrade: true
     state: latest # noqa package-latest This role is to update packages.
+    
 # Debian Dist Upgrade
 - name: Upgrade OS and 
   when: apt.dist_upgrade
