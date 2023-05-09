@@ -2,6 +2,7 @@
 # handlers file for linux_update_role
 - name: Reboot
   ansible.builtin.reboot:
+    msg: "Reboot {{ inventory_hostname }}"
   when:
-    - update_reboot
+    - do_reboot
     - ansible_connection not in [ "container", "docker", "community.docker.docker" ]

@@ -58,9 +58,9 @@
       - zypper.dist_upgrade is boolean    
     quiet: yes
 
-- name: Test if update_reboot is set correctly
+- name: Test if do_reboot is set correctly
   ansible.builtin.assert:
     that:
-      - update_reboot is defined
-      - update_reboot is boolean
+      - do_reboot is defined
+      - do_reboot is boolean
     quiet: yes
