@@ -26,15 +26,11 @@
     path: /var/run/reboot-required
 
 # Check if file exist
-- name: Check if reboot is required
+- name: If required Reboot {{ inventory_hostname }}
   when: reboot_required.stat.exists and do_reboot
   ansible.builtin.reboot:
     msg: "Reboot {{ inventory_hostname }}"
-
-- name: Wait for reboot to complete and SSH to become available
-  ansible.builtin.wait_for_connection:
-    connect_timeout: 30
-    delay: 5
+    connect_timeout: 60
 
 - name: Debug System is back
   ansible.builtin.debug:
