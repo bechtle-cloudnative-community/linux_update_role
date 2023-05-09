@@ -38,4 +38,4 @@
 
 - name: Debug System is back
   ansible.builtin.debug:
-    msg: "System {{ inventroy_hostname }} is Rebooted"
+    msg: "System {{ inventory_hostname }} is Rebooted"
