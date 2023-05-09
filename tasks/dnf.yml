@@ -26,9 +26,13 @@
     update_cache: true
     update_only: true
 
-
 - name: Remove packates not needed anymore
   ansible.builtin.dnf:
     autoremove: true
 
-    
+# - name: Check to see if we need a reboot
+#   register: result§
+#   changed_when: result.rc == 1
+#   ignore_errors: yes 
+#    ansible.builtin.command: needs-restarting -r
+  
