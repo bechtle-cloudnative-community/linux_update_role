@@ -4,3 +4,5 @@ supported_pkg_mgr:
   - apt
   - dnf
   - zypper
+
+system_need_reboot: false

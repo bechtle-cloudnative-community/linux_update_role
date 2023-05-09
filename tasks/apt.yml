@@ -25,13 +25,6 @@
   ansible.builtin.stat:
     path: /var/run/reboot-required
 
-# Check if file exist
-- name: If required Reboot {{ inventory_hostname }}
-  when: reboot_required.stat.exists and do_reboot
-  ansible.builtin.reboot:
-    msg: "Reboot {{ inventory_hostname }}"
-    connect_timeout: 60
-
-- name: Debug System is back
-  ansible.builtin.debug:
-    msg: "System {{ inventory_hostname }} is Rebooted"
+- name: Set fact if reboot is necessary
+  ansible.builtin.set_fact:
+    system_need_reboot: "{{ reboot_required.stat.exists }}"

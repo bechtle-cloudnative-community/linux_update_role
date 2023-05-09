@@ -30,63 +30,20 @@
   ansible.builtin.include_tasks:
     file: "{{ ansible_pkg_mgr }}.yml"
 
-# - name: Configure apk
-#   block:
-#     - name: Update cache (apk)
-#       community.general.apk:
-#         update_cache: yes
-#       changed_when: no
 
-#     - name: Update all software (apk)
-#       community.general.apk:
-#         upgrade: yes
-#       notify:
-#         - Reboot
-#   when:
-#     - ansible_pkg_mgr == "apk"
+- name: Tasks to reboot if needed
+  when: system_need_reboot and do_reboot
+  block:
+# Check if file exist
+    - name: If required Reboot {{ inventory_hostname }}
+      ansible.builtin.reboot:
+        msg: "Reboot {{ inventory_hostname }}"
+        connect_timeout: 60
 
-# - name: Update all software (dnf)
-#   ansible.builtin.dnf:
-#     name: "*"
-#     state: latest  # noqa package-latest This role is to update packages.
-#   notify:
-#     - Reboot
-#   when:
-#     - ansible_pkg_mgr == "dnf"
-
-# - name: Update all software (pacman)
-#   community.general.pacman:
-#     update_cache: yes
-#     upgrade: yes
-#   notify:
-#     - Reboot
-#   when:
-#     - ansible_pkg_mgr == "pacman"
-
-# - name: Configure yum
-#   block:
-#     - name: Update all software (yum/6)
-#       ansible.builtin.yum:
-#         name: "*"
-#         state: latest  # noqa package-latest This role is to update packages.
-#       notify:
-#         - Reboot
-#       when:
-#         - ansible_distribution_major_version == "6"
-
-#     - name: Update all software (yum/7)
-#       ansible.builtin.yum:
-#         name: "*"
-#         state: latest  # noqa package-latest This role is to update packages.
-#       notify:
-#         - Reboot
-#       when:
-#         - ansible_distribution_major_version == "7"
-
-#     - name: Install yum-utils
-#       ansible.builtin.package:
-#         name: yum-utils
-#       when:
-#         - ansible_distribution_major_version == "7"
-#   when:
-#     - ansible_pkg_mgr == "yum"
+    - name: Debug System is back
+      ansible.builtin.debug:
+        msg: "System {{ inventory_hostname }} is Rebooted"
+  rescue:
+    - name: "Message if Reboot Failed"
+      ansible.builtin.fail:
+        "{{ inventory_hostname }} is failed on reboot"
