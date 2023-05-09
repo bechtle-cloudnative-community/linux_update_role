@@ -28,6 +28,7 @@
 # Check if file exist
 - name: Check if reboot is required
   when: reboot_required.stat.exists
+  changed_when: True
   ansible.builtin.debug:
     msg: "Reboot is necessary"
   notify:
