@@ -32,7 +32,7 @@
 
 
 - name: Check to see if we need a reboot
-  register: result§
+  register: result
   changed_when: result.rc == 1
   failed_when: result.rc > 1
   ignore_errors: true
