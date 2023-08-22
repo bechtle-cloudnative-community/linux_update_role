@@ -20,7 +20,7 @@ dnf:
 # SUSE pakcage manager
 zypper:
   patch: false
-  dist_upgrade: true
+  dist_upgrade: false
 
 # When updating systems, a reboot may be required. Here you can select to:
 # "yes": Always reboot when packages have changed.
