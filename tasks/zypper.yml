@@ -5,6 +5,7 @@
   community.general.zypper:
     name: '*'
     state: latest
+    update_cache: true  
 
 # SUSE Zyper patch only bugfixes & security
 - name: Apply only bugfixes & security
@@ -13,6 +14,7 @@
     name: '*'
     state: latest
     type: patch
+    update_cache: true
 
 # SUSE Zyper patch only bugfixes & security
 - name: Apply only bugfixes & security
@@ -21,3 +23,4 @@
     name: '*'
     state: dist-upgrade
     allow_vendor_change: true
+    update_cache: true
