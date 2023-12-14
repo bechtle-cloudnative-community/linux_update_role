@@ -10,3 +10,4 @@ images:
 
 dependencies:
   galaxy: requirements.yml
+  python: requirements.txt
