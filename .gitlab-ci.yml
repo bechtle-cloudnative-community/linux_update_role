@@ -1,13 +1,13 @@
 ---
-  default:
-    image: registry.gitlab-bs.demolab.ch:4567/ansible-ee/ansible_ee_vmware:latest
-  stages:
-    - test
-  
-  variables:
-    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip"
-    GIT_STRATEGY: clone
-    ANSIBLE_FORCE_COLOR: 'true'   
+default:
+  image: registry.gitlab-bs.demolab.ch:4567/ansible-ee/ansible_ee_vmware:latest
+stages:
+  - test
+
+variables:
+  PIP_CACHE_DIR: '$CI_PROJECT_DIR/.pip'
+  GIT_STRATEGY: clone
+  ANSIBLE_FORCE_COLOR: 'true'
 
   molecule:
     stage: test
