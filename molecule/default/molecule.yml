@@ -2,10 +2,6 @@
 dependency:
   name: galaxy
 
-driver:
-  name: test
-
-
 platforms:
   - name: debian
     namespace: devops
