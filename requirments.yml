@@ -1,3 +1,6 @@
 ---
 collection:
   - name: kubevirt.core
+
+    # collection source
+    source: https://old-galaxy.ansible.com
