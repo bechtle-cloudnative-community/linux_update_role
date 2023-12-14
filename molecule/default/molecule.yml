@@ -1,8 +1,9 @@
 ---
 dependency:
   name: galaxy
+
 driver:
-  name: kubevirt
+  name: test
 
 
 platforms:
@@ -37,6 +38,7 @@ verifier:
 #   set -e
 #   yamllint .
 #   ansible-lint .
+
 scenario:
   test_sequence:
     - dependency
