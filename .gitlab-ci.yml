@@ -2,9 +2,6 @@
 default:
   image: python:latest
 
-stages:          # List of stages for jobs and their order of execution
-  - test
-
 variables:
   # When using dind, it's wise to use the overlayfs driver for improved performance.
   DOCKER_DRIVER: overlay2
@@ -31,7 +28,6 @@ before_script:
   - source ../molecule-ve/bin/activate
 
 molecule:
-  stage: test
-  script:
+  ansible.builtin.script:
     - sed 's/1024/4096/g' -i /usr/local/lib/python3.11/site-packages/molecule_kubevirt/playbooks/create.yml
     - molecule test
