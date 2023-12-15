@@ -26,6 +26,7 @@ before_script:
   # python env
   - python3 -m venv ../molecule-ve
   - source ../molecule-ve/bin/activate
+  - pip install -r requirements.txt
 
 molecule:
   script:
