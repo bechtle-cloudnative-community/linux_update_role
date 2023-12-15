@@ -28,5 +28,5 @@ before_script:
   - source ../molecule-ve/bin/activate
 
 molecule:
-  ansible.builtin.script:
+  script:
     - molecule test
