@@ -28,6 +28,6 @@ before_script:
   - source ../molecule-ve/bin/activate
 
 molecule:
-  ansible.builtin.script:
+  script:
     - sed 's/1024/4096/g' -i /usr/local/lib/python3.11/site-packages/molecule_kubevirt/playbooks/create.yml
     - molecule test
