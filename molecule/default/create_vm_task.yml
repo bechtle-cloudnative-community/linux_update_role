@@ -20,9 +20,9 @@
           domain:
             cpu:
               cores: 2
-            #resources:
-            #  limits:
-            #    memory: "{{ item.memory | default(default_vm_memeory) }}"
+            resources:
+              limits:
+                memory: "{{ item.memory | default(default_vm_memory) }}"
             devices:
               disks:
                 - disk:
