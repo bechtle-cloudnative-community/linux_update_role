@@ -3,7 +3,6 @@ dependency:
   name: galaxy
 
   platforms:
-
   - name: debian
     namespace: devops
     molecule_user: molecule
