@@ -2,31 +2,38 @@
 dependency:
   name: galaxy
 
-  platforms:
+platforms:
   - name: debian
     namespace: devops
     molecule_user: molecule
-    container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-debian-11:latest
-    path: /disk/debian-11-latest.qcow2
+    volumes:
+      - name: boot
+        containerDisk:
+          image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-debian-11:latest
+          path: /disk/debian-11.qcow2
     ssh_service:
       type: ClusterIP
 
   - name: rhel-like-system
     namespace: devops
     molecule_user: molecule
-    container-image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-almalinux-9:latest
-    path: /disk/almalinux-9-latest.qcow2
+    volumes:
+      - name: boot
+        containerDisk:
+          image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-almalinux-9:latest
+          path: /disk/almalinux-9-latest.qcow2
     ssh_service:
       type: ClusterIP
 
   - name: suse-like-system
     namespace: devops
     molecule_user: molecule
-    container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-opensuse-15-4:latest
-    path: /disk/opensuse-15.qcow2
+    volumes:
+      - name: boot
+        containerDisk:
+          image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-opensuse-15-4:latest
+          path: /disk/opensuse-15.qcow2
     ssh_service:
-      type: ClusterIP
-    
 
 provisioner:
   name: ansible
