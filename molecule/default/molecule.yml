@@ -3,6 +3,14 @@ dependency:
   name: galaxy
 
   platforms:
+
+  - name: debian
+    namespace: devops
+    molecule_user: molecule
+    container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image
+    ssh_service:
+      type: ClusterIP
+
   - name: rhel-like-system
     namespace: devops
     molecule_user: molecule
@@ -14,13 +22,6 @@ dependency:
     namespace: devops
     molecule_user: molecule
     container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-opensuse-15-4:latest
-    ssh_service:
-      type: ClusterIP
-
-  - name: debian
-    namespace: devops
-    molecule_user: molecule
-    container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image
     ssh_service:
       type: ClusterIP
 
