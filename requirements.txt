@@ -10,4 +10,3 @@ molecule-plugins[podman]==23.5.0
 Jinja2
 kubernetes
 kubernetes
-passlib
