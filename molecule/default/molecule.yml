@@ -6,9 +6,10 @@ dependency:
   - name: debian
     namespace: devops
     molecule_user: molecule
-    container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image
+    container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-debian-11:latest
     ssh_service:
       type: ClusterIP
+    memory: 1Gi
 
   - name: rhel-like-system
     namespace: devops
@@ -16,6 +17,7 @@ dependency:
     container-image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-almalinux-9:latest
     ssh_service:
       type: ClusterIP
+    memory: 1Gi
 
   - name: suse-like-system
     namespace: devops
@@ -23,6 +25,7 @@ dependency:
     container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-opensuse-15-4:latest
     ssh_service:
       type: ClusterIP
+    memory: 1Gi
 
 provisioner:
   name: ansible
