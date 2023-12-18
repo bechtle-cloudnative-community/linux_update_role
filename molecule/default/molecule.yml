@@ -34,6 +34,7 @@ platforms:
           image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-opensuse-15-4:latest
           path: /disk/opensuse-15.qcow2
     ssh_service:
+      type: ClusterIP
 
 provisioner:
   name: ansible
