@@ -3,15 +3,6 @@
   block:
 
     - name: Create virtual machines
-      apiVersion: snapshot.storage.k8s.io/v1
-      kind: VolumeSnapshotClass
-      metadata:
-        name: csi-hostpath-snapclass
-        annotations:
-          snapshot.storage.kubernetes.io/is-default-class: "true"
-      driver: hostpath.csi.k8s.io
-      deletionPolicy: Delete
-      
       kubevirt.core.kubevirt_vm:
         name: "{{ item.name }}"
         namespace: "{{ item.namespace | default(default_namespace) }}"
@@ -81,11 +72,15 @@
         state: present
         wait: true
         definition:
-          apiVersion: v1
-          kind: Service
+          apiVersion: snapshot.storage.k8s.io/v1
+          kind: VolumeSnapshotClass
+          driver: hostpath.csi.k8s.io
+          deletionPolicy: Delete
           metadata:
             name: "{{ item.name }}"
             namespace: "{{ item.namespace | default(default_namespace) }}"
+            annotations:
+                snapshot.storage.kubernetes.io/is-default-class: "true"
           spec:
             selector:
               ansible-molecule: "{{ item.name }}"
