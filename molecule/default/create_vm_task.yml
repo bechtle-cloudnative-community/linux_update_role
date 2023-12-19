@@ -58,7 +58,7 @@
             spec:
               source:
                 registry:
-                  url: "docker://{{ item.container_image }}"
+                  url: "docker://{{ item.image }}"
               storage:
                 accessModes:
                   - ReadWriteOnce
