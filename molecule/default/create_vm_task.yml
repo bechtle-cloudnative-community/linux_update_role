@@ -3,13 +3,16 @@
   block:
 
     - name: Create virtual machines
+      apiVersion: snapshot.storage.k8s.io/v1
+      kind: VolumeSnapshotClass
+      metadata:
+        name: csi-hostpath-snapclass
+        annotations:
+          snapshot.storage.kubernetes.io/is-default-class: "true"
+      driver: hostpath.csi.k8s.io
+      deletionPolicy: Delete
+      
       kubevirt.core.kubevirt_vm:
-        apiVersion: snapshot.storage.k8s.io/v1
-        kind: VolumeSnapshotClass
-        metadata:
-          name: csi-hostpath-snapclass
-        driver: hostpath.csi.k8s.io
-        deletionPolicy: Delete
         name: "{{ item.name }}"
         namespace: "{{ item.namespace | default(default_namespace) }}"
         state: present
