@@ -50,7 +50,7 @@
                     - ALL=(ALL) NOPASSWD:ALL
           name: cloudinit
     data_volume_templates:
-        apiVersion: snapshot.kubevirt.io/v1alpha1
+      - apiVersion: snapshot.kubevirt.io/v1alpha1
         kind: VirtualMachineSnapshot
         metadata:
           name: "pvc-{{ item.name }}-root"
