@@ -4,7 +4,6 @@
   - name: "{{ item.name }}"
     namespace: "{{ item.namespace | default(default_namespace) }}"
     state: present
-    wait_timeout: 300
     wait: true
     running: true
     labels:
