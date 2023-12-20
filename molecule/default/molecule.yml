@@ -39,7 +39,7 @@ platforms:
       type: ClusterIP
 
 provisioner:
-  name: ansible
+  name: driver.longhorn.io
   log: true
 
 verifier:
