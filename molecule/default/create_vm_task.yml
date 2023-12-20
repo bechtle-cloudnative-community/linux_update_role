@@ -10,6 +10,8 @@
       ansible-molecule: "{{ item.name }}"
       vm.cnv.io/name: "{{ item.name }}"
     spec:
+      apiVersion: snapshot.kubevirt.io/v1alpha1
+      kind: VirtualMachineSnapshot
       hostname: "{{ item.name }}"
       subdomain: "molecule"
       runStrategy: Always
@@ -48,8 +50,8 @@
                     - ALL=(ALL) NOPASSWD:ALL
           name: cloudinit
     data_volume_templates:
-      - apiversion: kubevirt.io/v1
-        kind: virtualmachine
+        apiVersion: snapshot.kubevirt.io/v1alpha1
+        kind: VirtualMachineSnapshot
         metadata:
           name: "pvc-{{ item.name }}-root"
           namespace: devops
