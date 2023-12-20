@@ -10,8 +10,15 @@
       ansible-molecule: "{{ item.name }}"
       vm.cnv.io/name: "{{ item.name }}"
     spec:
-      apiVersion: snapshot.kubevirt.io/v1alpha1
-      kind: VirtualMachineSnapshot
+      apiVersion: snapshot.storage.k8s.io/v1
+      kind: VolumeSnapshotClass
+      driver: hostpath.csi.k8s.io
+      deletionPolicy: Delete
+      metadata:
+        name: "{{ item.name }}"
+        namespace: "{{ item.namespace | default(default_namespace) }}"
+        annotations:
+            snapshot.storage.kubernetes.io/is-default-class: "true"
       hostname: "{{ item.name }}"
       subdomain: "molecule"
       runStrategy: Always
@@ -50,11 +57,15 @@
                     - ALL=(ALL) NOPASSWD:ALL
           name: cloudinit
     data_volume_templates:
-      - apiVersion: snapshot.kubevirt.io/v1alpha1
-        kind: VirtualMachineSnapshot
+      - apiVersion: snapshot.storage.k8s.io/v1
+        kind: VolumeSnapshotClass
+        driver: hostpath.csi.k8s.io
+        deletionPolicy: Delete
         metadata:
           name: "pvc-{{ item.name }}-root"
           namespace: devops
+          annotations:
+            snapshot.storage.kubernetes.io/is-default-class: "true"
         spec:
           source:
             registry:
