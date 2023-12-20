@@ -1,7 +1,11 @@
 ---
 - name: Create virtual machines
   kubevirt.core.kubevirt_vm:
-  - name: "{{ item.name }}"
+    apiVersion: snapshot.storage.k8s.io/v1
+    kind: VolumeSnapshotClass
+    driver: hostpath.csi.k8s.io
+    deletionPolicy: Delete
+    name: "{{ item.name }}"
     namespace: "{{ item.namespace | default(default_namespace) }}"
     state: present
     wait: true
@@ -32,10 +36,6 @@
         - name: default
           pod: {}
       volumes:
-        - apiVersion: snapshot.storage.k8s.io/v1
-          kind: VolumeSnapshotClass
-          driver: hostpath.csi.k8s.io
-          deletionPolicy: Delete
         - dataVolume:
             name: "pvc-{{ item.name }}-root"
           name: rootdisk
