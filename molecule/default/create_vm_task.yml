@@ -1,7 +1,7 @@
 ---
 - name: Create virtual machines
   kubevirt.core.kubevirt_vm:
-    apiVersion: snapshot.kubevirt.io/v1alpha1
+    api_version: snapshot.kubevirt.io/v1alpha1
     name: "{{ item.name }}"
     namespace: "{{ item.namespace | default(default_namespace) }}"
     state: present
@@ -54,7 +54,7 @@
           namespace: devops
         spec:
           source:
-            apiGroup: kubevirt.io
+            api_version: snapshot.kubevirt.io/v1alpha1
             registry:
               url: "docker://{{ item.image | default(default_image) }}"
           storage:
