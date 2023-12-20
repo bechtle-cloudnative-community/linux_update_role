@@ -1,7 +1,6 @@
 ---
 - name: Create virtual machines
   kubevirt.core.kubevirt_vm:
-    api_version: snapshot.kubevirt.io/v1alpha1
     name: "{{ item.name }}"
     namespace: "{{ item.namespace | default(default_namespace) }}"
     state: present
@@ -49,12 +48,13 @@
                     - ALL=(ALL) NOPASSWD:ALL
           name: cloudinit
     data_volume_templates:
-      - metadata:
+      - apiversion: kubevirt.io/v1
+        kind: virtualmachine
+        metadata:
           name: "pvc-{{ item.name }}-root"
           namespace: devops
         spec:
           source:
-            api_version: snapshot.kubevirt.io/v1alpha1
             registry:
               url: "docker://{{ item.image | default(default_image) }}"
           storage:
