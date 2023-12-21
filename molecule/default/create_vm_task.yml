@@ -10,10 +10,6 @@
       ansible-molecule: "{{ item.name }}"
       vm.cnv.io/name: "{{ item.name }}"
     spec:
-      apiVersion: snapshot.storage.k8s.io/v1
-      kind: VolumeSnapshotClass
-      driver: hostpath.csi.k8s.io
-      deletionPolicy: Delete
       metadata:
         name: "{{ item.name }}"
         namespace: "{{ item.namespace | default(default_namespace) }}"
@@ -57,10 +53,6 @@
                     - ALL=(ALL) NOPASSWD:ALL
           name: cloudinit
     data_volume_templates:
-      - apiVersion: snapshot.storage.k8s.io/v1
-        kind: VolumeSnapshotClass
-        driver: hostpath.csi.k8s.io
-        deletionPolicy: Delete
         metadata:
           name: "pvc-{{ item.name }}-root"
           namespace: devops
