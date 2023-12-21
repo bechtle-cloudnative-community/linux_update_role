@@ -4,12 +4,6 @@ dependency:
   options:
     requirements-file: ../../requirements.yml
 
-driver:
-  name: vagrant
-  provider:
-    name: libvirt
-    type: libvirt
-
 platforms:
   - name: debian
     namespace: devops
