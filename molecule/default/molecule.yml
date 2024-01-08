@@ -8,33 +8,21 @@ platforms:
   - name: debian
     namespace: devops
     molecule_user: molecule
-    volumes:
-      - name: boot
-        containerDisk:
-          image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-debian-11:latest
-          path: /disk/debian-11.qcow2
+    container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-debian-11:latest
     ssh_service:
       type: ClusterIP
 
   - name: rhel-like-system
     namespace: devops
     molecule_user: molecule
-    volumes:
-      - name: boot
-        containerDisk:
-          image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-almalinux-9:latest
-          path: /disk/almalinux-9-latest.qcow2
+    container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-almalinux-9:latest
     ssh_service:
       type: ClusterIP
 
   - name: suse-like-system
     namespace: devops
     molecule_user: molecule
-    volumes:
-      - name: boot
-        containerDisk:
-          image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-opensuse-15-4:latest
-          path: /disk/opensuse-15.qcow2
+    container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-opensuse-15-4:latest
     ssh_service:
       type: ClusterIP
 
