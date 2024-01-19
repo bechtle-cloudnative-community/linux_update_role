@@ -10,7 +10,7 @@ apt:
   dist_upgrade_type: dist
   
   # For APT (Debian/Ubuntu) only: update the apt cache if it's older than the cache_valid_time. Set in seconds.
-  update_cache_valid_time: 1
+  update_cache_valid_time: 2
 
 # define values for dnf  
 dnf:
