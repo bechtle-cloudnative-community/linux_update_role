@@ -4,7 +4,7 @@ default:
 
 variables:
   # When using dind, it's wise to use the overlayfs driver for improved performance.
-  DOCKER_DRIVER: overlay2
+  # DOCKER_DRIVER: overlay2
   # For non-Kubernetes executors, we use tcp://docker:2375
   # DOCKER_HOST: tcp://docker:2375
   # Instead of using TLS (https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#tls-enabled), set certs dir to
