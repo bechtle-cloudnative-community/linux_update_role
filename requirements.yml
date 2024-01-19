@@ -2,6 +2,7 @@
 collections:
   - name: ansible.posix
   - name: ansible.utils
+    source: https://old-galaxy.ansible.com 
   - name: awx.awx
   - name: containers.podman
   - name: kubernetes.core
