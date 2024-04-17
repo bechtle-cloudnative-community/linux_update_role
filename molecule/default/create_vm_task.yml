@@ -28,8 +28,7 @@
                 - disk:
                     bus: virtio
                   name: rootdisk
-                - disk:
-                    bus: virtio
+                - disk: {}
                   name: cloudinit
               interfaces:
                 - name: default
