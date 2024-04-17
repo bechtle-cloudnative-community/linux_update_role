@@ -30,4 +30,4 @@ before_script:
 
 molecule:
   script:
-    - molecule test
+    - molecule test -- -vvv
