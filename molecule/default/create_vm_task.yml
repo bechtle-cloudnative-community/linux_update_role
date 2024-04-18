@@ -128,6 +128,13 @@
         line: '{{ instance_conf_dict.address }} {{ instance_conf_dict.instance }}'
         state: present
 
+    - name: Ssh access test
+          ansible.builtin.wait_for:
+            timeout: "{{ item.ssh_timeout | default(default_ssh_timeout) }}"
+            port: "{{ instance_conf_dict.port }}"
+            host: "{{ instance_conf_dict.address }}"
+            delay: "{{ item.ssh_delay | default(default_ssh_delay) }}"
+
     - name: Convert instance config dict to a list
       ansible.builtin.set_fact:
         instance_conf: "{{ instance_conf | default([]) + [ instance_conf_dict ] }}"
