@@ -3,42 +3,23 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  no_log: "{{ molecule_no_log }}"
   tasks:
-    - name: Delete VM
-      kubevirt.core.kubevirt_vm:
+    - name: Delete VM Instance in KubeVirt
+      kubernetes.core.k8s:
         state: absent
-        name: "{{ item.name }}"
-        namespace: "{{ item.namespace | default('default') }}"
-        wait: true
+        kind: VirtualMachine
+        name: "{{ vm.name }}"
+        namespace: "{{ vm.namespace }}"
       loop: "{{ molecule_yml.platforms }}"
       loop_control:
-        label: "{{ item.name }}"
+        loop_var: vm
 
-    # - name: Delete cloud init
-    #   kubernetes.core.k8s:
-    #     state: absent
-    #     kind: Secret
-    #     name: "{{ item.name }}"
-    #     namespace: "{{ item.namespace | default('default') }}"
-    #   loop: "{{ molecule_yml.platforms }}"
-    #   loop_control:
-    #     label: "{{ item.name }}"
-
-    - name: Delete ssh service
+    - name: Delete VM Instance in KubeVirt
       kubernetes.core.k8s:
         state: absent
         kind: Service
-        name: "{{ item.name }}"
-        namespace: "{{ item.namespace | default('default') }}"
+        name: "{{ vm.name }}"
+        namespace: "{{ vm.namespace }}"
       loop: "{{ molecule_yml.platforms }}"
       loop_control:
-        label: "{{ item.name }}"
-
-    - name: Delete ssh key pair
-      ansible.builtin.file:
-        path: "{{ molecule_ephemeral_directory }}/identity_{{ item.name }}"
-        state: absent
-      loop: "{{ molecule_yml.platforms }}"
-      loop_control:
-        label: "{{ item.name }}"
+        loop_var: vm

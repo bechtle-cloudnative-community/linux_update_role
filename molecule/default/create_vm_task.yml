@@ -26,10 +26,11 @@
             devices:
               disks:
                 - disk:
-                    bus: virtio
-                  name: rootdisk
-                - disk: {}
-                  name: cloudinit
+                    bus: virtio # Type of disk bus
+                  name: rootdisk # Name of the container disk
+                - disk:
+                    bus: virtio # Type of disk bus
+                  name: cloudinitdisk # Name of the cloud-init disk
               interfaces:
                 - name: default
                   masquerade: {}
@@ -45,13 +46,12 @@
                   #cloud-config
                   users:
                     - name: {{ default_user_molecule }}
-                      hash_passwd: {{ default_hashed_passwd }}
-                      lock_passwd: false
+                      lock_passwd: true
                       ssh_authorized_keys:
                         - {{ lookup('file', ssh_key_path + '.pub') }}
                       sudo:
                         - ALL=(ALL) NOPASSWD:ALL
-              name: cloudinit
+              name: cloudinitdisk
         data_volume_templates:
           - metadata:
               name: "pvc-{{ item.name }}-root"
