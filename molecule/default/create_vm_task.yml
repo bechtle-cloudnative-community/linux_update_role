@@ -46,7 +46,8 @@
                   #cloud-config
                   users:
                     - name: {{ default_user_molecule }}
-                      lock_passwd: true
+                      lock_passwd: false
+                      passwd: {{ default_hashed_passwd }}                      
                       ssh_authorized_keys:
                         - {{ lookup('file', ssh_key_path + '.pub') }}
                       sudo:

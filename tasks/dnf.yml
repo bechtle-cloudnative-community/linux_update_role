@@ -1,4 +1,9 @@
 ---
+- name: Ensure need-restarting is available
+  ansible.builtin.dnf:
+    name: dnf-utils
+    state: present
+
 # DNF Upgrade task
 - name: Update all software (dnf)
   when: not dnf.only_bugfix and not dnf.only_security
@@ -31,8 +36,14 @@
     autoremove: true
 
 - name: Check to see if we need a reboot
-  register: system_need_reboot
-  changed_when: system_need_reboot.rc == 1
-  failed_when: system_need_reboot.rc > 1
+  register: need_reboot_out
+  changed_when: '"true" in need_reboot_out.stdout'
+  failed_when: need_reboot_out.rc > 1
   ignore_errors: true
-  ansible.builtin.command: needs-restarting -r
+  ansible.builtin.shell:
+    cmd: needs-restarting -r || echo true
+
+- name: Set reboot Fact
+  when: '"true" in need_reboot_out.stdout' 
+  ansible.builtin.set_fact:
+    system_need_reboot: true
